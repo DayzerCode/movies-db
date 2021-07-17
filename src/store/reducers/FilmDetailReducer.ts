@@ -1,4 +1,3 @@
-import {TopType, TopTypes} from "../../types/kinopoisk/TopType";
 import FilmDetailResponse from "../../api/kinopoisk/Responses/FilmDetailResponse";
 import {FilmDetailType, FilmDetailTypes} from "../../types/kinopoisk/FilmDetailType";
 
@@ -14,7 +13,7 @@ const FilmDetailInitialState : FilmDetailState = {
     isLoading: false
 };
 
-export const topReducer = (state = FilmDetailInitialState, action: FilmDetailType): FilmDetailState => {
+export const filmDetailReducer = (state = FilmDetailInitialState, action: FilmDetailType): FilmDetailState => {
     switch (action.type) {
         case FilmDetailTypes.FETCH:
             return {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Card} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import FilmResponse from "../../../api/kinopoisk/Responses/FilmResponse";
 import Rating from "../../films/rating/Rating";
@@ -7,6 +7,7 @@ import ArrayHelper from "../../../utils/ArrayHelper";
 import './FilmList.css';
 import {RatingType} from "../../../types/kinopoisk/RatingType";
 import RatingWaiting from "../ratingWaiting/RatingWaiting";
+import FilmHelper from "../../../utils/FilmHelper";
 
 interface FilmListProps {
     films: FilmResponse[],
@@ -36,7 +37,7 @@ const FilmList: React.FC<FilmListProps> = (props) => {
                                         <p>{ArrayHelper.getListAsString(film.genres, 'genre')}</p>
                                         <p>Длительность: {film.filmLength} мин.</p>
                                     </div>
-                                    <Button variant="primary">Подробнее</Button>
+                                    <a className="btn btn-primary" href={FilmHelper.getDetailLink(film.filmId)}>Подробнее</a>
                                 </Card.Body>
                             </Card>
                         </div>
