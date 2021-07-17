@@ -1,0 +1,9 @@
+.film-item {
+    width: 90%;
+    margin: 1rem auto;
+}
+
+.film-item .card-img-top {
+    margin: 0 auto 1rem;
+    width: 300px;
+}
