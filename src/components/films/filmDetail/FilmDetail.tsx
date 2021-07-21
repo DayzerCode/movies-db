@@ -7,7 +7,8 @@ import {useDispatch} from "react-redux";
 import {fetchFilmDetail} from "../../../store/action-creators/FetchFilmDetail";
 import Loading from "../../common/loading/Loading";
 import ArrayHelper from "../../../utils/ArrayHelper";
-import Rating from "../rating/Rating";
+import {fetchStaffListByFilmId} from "../../../store/action-creators/FetchStaffListByFilmId";
+import StaffList from "../../staffList/StaffList";
 
 interface FilmDetailParams {
     id?: string | undefined;
@@ -18,46 +19,52 @@ type FilmDetailProps = RouteComponentProps<FilmDetailParams>;
 const FilmDetail: React.FC<FilmDetailProps> = (props) => {
     const dispatch = useDispatch();
 
-    const {result, isLoading, error} = useTypeSelector(state => state.filmDetail);
+    const {film, staffList} = useTypeSelector(state => state.filmDetail);
     useEffect(() => {
         if (props.match.params.id) {
             const filmId = parseInt(props.match.params.id);
             dispatch(fetchFilmDetail(filmId));
         }
     }, []);
-    if (isLoading) {
+
+    const fetchStaffList = () => {
+        if (film.result && film.result.filmId && staffList.result === null) {
+            dispatch(fetchStaffListByFilmId(film.result.filmId));
+        }
+    }
+
+    if (film.isLoading) {
         return <Loading/>;
     }
 
-    if (error) {
-        return (<p>{error}</p>);
+    if (film.error) {
+        return (<p>{film.error}</p>);
     }
-    if (result) {
-        console.log(result);
+    if (film.result) {
         return (
             <div className="card p-4">
                 <div className="row">
                     <div className="col-5">
-                        <img alt={result.nameRu} src={result.posterUrl} className="card-img-top"/>
+                        <img alt={film.result.nameRu} src={film.result.posterUrl} className="card-img-top"/>
                     </div>
                     <div className="col-7">
                         <div className="card-body">
-                            <h5 className="card-title">{result.nameRu} / {result.nameEn}</h5>
-                            <p className="card-text">{result.slogan}</p>
+                            <h5 className="card-title">{film.result.nameRu} / {film.result.nameEn}</h5>
+                            <p className="card-text">{film.result.slogan}</p>
                         </div>
                         <ul className="list-group list-group-flush">
-                            <li className="list-group-item">Дата выхода: {result.year}</li>
-                            <li className="list-group-item">{result.genres && ArrayHelper.getListAsString(result.genres, 'genre')}</li>
-                            <li className="list-group-item">{result.countries && ArrayHelper.getListAsString(result.countries, 'country')}</li>
+                            <li className="list-group-item">Дата выхода: {film.result.year}</li>
+                            <li className="list-group-item">{film.result.genres && ArrayHelper.getListAsString(film.result.genres, 'genre')}</li>
+                            <li className="list-group-item">{film.result.countries && ArrayHelper.getListAsString(film.result.countries, 'country')}</li>
                         </ul>
 
                         <div className="card-body">
-                            {result.description}
+                            {film.result.description}
                         </div>
                     </div>
                 </div>
                 <div id="accordion" className="w-100 mt-4 ">
-                    {result.facts && result.facts.length > 0 &&
+                    {film.result.facts && film.result.facts.length > 0 &&
                     <div className="card">
                         <div className="card-header" id="headingOne">
                             <h5 className="mb-0">
@@ -69,7 +76,7 @@ const FilmDetail: React.FC<FilmDetailProps> = (props) => {
                         <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                             <div className="card-body">
                                 <ul className="list-group list-group-flush">
-                                    {result.facts.map((fact, index) => {
+                                    {film.result.facts.map((fact, index) => {
                                         return (
                                             <li key={index} className="list-group-item">{fact}</li>
                                         )
@@ -82,14 +89,16 @@ const FilmDetail: React.FC<FilmDetailProps> = (props) => {
                     <div className="card">
                         <div className="card-header" id="headingTwo">
                             <h5 className="mb-0">
-                                <button className="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <button onClick={() => fetchStaffList()} className="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     Актеры
                                 </button>
                             </h5>
                         </div>
                         <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                             <div className="card-body">
-                                in progress
+                                {staffList.result && staffList.result.length > 0 &&
+                                    <StaffList staffList={staffList.result}/>
+                                }
                             </div>
                         </div>
                     </div>

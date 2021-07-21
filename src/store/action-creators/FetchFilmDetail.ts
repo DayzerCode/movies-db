@@ -5,19 +5,18 @@ import {FilmDetailType, FilmDetailTypes} from "../../types/kinopoisk/FilmDetailT
 export const fetchFilmDetail = (id: number) => {
     return async (dispatch: Dispatch<FilmDetailType>) => {
         dispatch({
-            type: FilmDetailTypes.FETCH,
+            type: FilmDetailTypes.FETCH_FILM,
         });
         const api = getFilmsApi();
         const response = api.getDetail(id);
-        console.log(response);
         response.then((response: any) => {
             dispatch({
-                type: FilmDetailTypes.SUCCESS,
+                type: FilmDetailTypes.SUCCESS_FILM,
                 payload: response.data
             });
         }).catch((error: Error) => {
             dispatch({
-                type: FilmDetailTypes.ERROR,
+                type: FilmDetailTypes.FILM_ERROR,
                 payload: error.message
             });
         });

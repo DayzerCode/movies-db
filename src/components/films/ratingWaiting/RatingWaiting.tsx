@@ -7,7 +7,6 @@ interface RatingProps {
 const RatingWaiting: React.FC<RatingProps> = (props) => {
     const ratingColor = () => {
         const ratingNumber = parseInt(props.rating);
-        console.log(ratingNumber);
         if (ratingNumber >= 80) {
             return 'text-success';
         } else if (ratingNumber >= 55) {
