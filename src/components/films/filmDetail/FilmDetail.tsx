@@ -89,7 +89,7 @@ const FilmDetail: React.FC<FilmDetailProps> = (props) => {
                     <div className="card">
                         <div className="card-header" id="headingTwo">
                             <h5 className="mb-0">
-                                <button onClick={() => fetchStaffList()} className="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <button onClick={fetchStaffList} className="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     Актеры
                                 </button>
                             </h5>

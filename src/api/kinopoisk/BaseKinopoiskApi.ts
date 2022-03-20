@@ -4,7 +4,7 @@ import config from "../../config";
 
 export default class BaseKinopoiskApi {
     protected token;
-    protected baseUrl = 'https://kinopoiskapiunofficial.tech/api/';
+    protected baseUrl = 'https://kinopoiskapiunofficial.tech/api';
 
     constructor() {
         this.token = config.kinopoiskToken;

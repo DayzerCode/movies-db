@@ -1,6 +1,7 @@
 import React from "react";
 import './Menu.css'
 import MenuItem from "../../../../interfaces/MenuItem";
+import {Link} from 'react-router-dom';
 
 const Menu: React.FC = () => {
     const menu: MenuItem[] = [
@@ -11,7 +12,7 @@ const Menu: React.FC = () => {
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light mb-5">
-                <a className="navbar-brand" href="/">MoviesDB</a>
+                <Link className="navbar-brand" to="/">MoviesDB</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -22,7 +23,7 @@ const Menu: React.FC = () => {
                         {menu.map(menuItem => {
                            return (
                                <li key={menuItem.id} className="nav-item">
-                                   <a className="nav-link" href={menuItem.link}>{menuItem.text}</a>
+                                    <Link className="nav-link" to={menuItem.link}>{menuItem.text}</Link>
                                </li>
                            )
                         })}

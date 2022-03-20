@@ -6,6 +6,7 @@ import {useTypeSelector} from "../../hooks/useTypeSelector";
 import {fetchStaffDetail} from "../../store/action-creators/FetchStaffDetail";
 import Loading from "../common/loading/Loading";
 import FilmHelper from "../../utils/FilmHelper";
+import {Link} from 'react-router-dom';
 
 interface StaffDetailParams {
     id?: string | undefined;
@@ -64,11 +65,11 @@ const StaffDetail: React.FC<StaffDetailProps> = (props) => {
                                     {result.films.map((film, index) => {
                                         return (
                                             <li key={index} className="list-group-item align-items-center">
-                                                <a href={FilmHelper.getDetailLink(film.filmId)}>
+                                                <Link to={FilmHelper.getDetailLink(film.filmId)}>
                                                     <p>{film.nameRu}</p>
                                                     <p>Роль: {film.professionKey}</p>
                                                     <p>{film.description}</p>
-                                                </a>
+                                                </Link>
                                             </li>
                                         )
                                     })}

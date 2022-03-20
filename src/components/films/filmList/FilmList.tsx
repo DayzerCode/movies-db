@@ -8,6 +8,7 @@ import './FilmList.css';
 import {RatingType} from "../../../types/kinopoisk/RatingType";
 import RatingWaiting from "../ratingWaiting/RatingWaiting";
 import FilmHelper from "../../../utils/FilmHelper";
+import {Link} from 'react-router-dom';
 
 interface FilmListProps {
     films: FilmResponse[],
@@ -37,7 +38,7 @@ const FilmList: React.FC<FilmListProps> = (props) => {
                                         <p>{ArrayHelper.getListAsString(film.genres, 'genre')}</p>
                                         <p>Длительность: {film.filmLength} мин.</p>
                                     </div>
-                                    <a className="btn btn-primary" href={FilmHelper.getDetailLink(film.filmId)}>Подробнее</a>
+                                    <Link to={FilmHelper.getDetailLink(film.filmId)} className="btn btn-primary">Подробнее</Link>
                                 </Card.Body>
                             </Card>
                         </div>
