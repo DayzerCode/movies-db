@@ -15,12 +15,12 @@ interface FilmListProps {
     ratingType: RatingType
 }
 
-const FilmList: React.FC<FilmListProps> = (props) => {
+const FilmList: React.FC<FilmListProps> = ({ films, ratingType   }) => {
     return (
         <>
-            {props.films && props.films.length > 0 &&
+            {films && films.length > 0 &&
             <div className="row mt-2">
-                {props.films.map((film, index) =>
+                {films.map((film, index) =>
                     <React.Fragment key={film.filmId}>
                         <div className="col-md-6">
                             <Card className="film-item">
@@ -29,13 +29,17 @@ const FilmList: React.FC<FilmListProps> = (props) => {
                                     <Card.Subtitle className="mb-2 text-muted"> {film.year} г.</Card.Subtitle>
                                     <Card.Img variant="top" src={film.posterUrlPreview}/>
                                     <div className="card-text">
-                                        {props.ratingType === RatingType.STANDARD ? (
+                                        {ratingType === RatingType.STANDARD ? (
                                             <Rating rating={film.rating}/>
                                         ) : (
                                             <RatingWaiting rating={String(film.rating)}/>
                                         )}
-                                        <p>{ArrayHelper.getListAsString(film.countries, 'country')}</p>
-                                        <p>{ArrayHelper.getListAsString(film.genres, 'genre')}</p>
+                                        {film.countries && film.countries.length > 0 &&
+                                            <p>{ArrayHelper.getListAsString(film.countries, 'country')}</p>
+                                        }
+                                        {film.genres && film.genres.length > 0 &&
+                                            <p>{ArrayHelper.getListAsString(film.genres, 'genre')}</p>
+                                        }
                                         <p>Длительность: {film.filmLength} мин.</p>
                                     </div>
                                     <Link to={FilmHelper.getDetailLink(film.filmId)} className="btn btn-primary">Подробнее</Link>

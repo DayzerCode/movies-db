@@ -4,17 +4,17 @@ import {RouteComponentProps} from 'react-router-dom';
 import {useDispatch} from "react-redux";
 import {useTypeSelector} from "../../hooks/useTypeSelector";
 import {fetchStaffDetail} from "../../store/action-creators/FetchStaffDetail";
-import Loading from "../common/loading/Loading";
+import Loading from "../../components/common/loading/Loading";
 import FilmHelper from "../../utils/FilmHelper";
 import {Link} from 'react-router-dom';
 
-interface StaffDetailParams {
+interface StaffDetailPageParams {
     id?: string | undefined;
 }
 
-type StaffDetailProps = RouteComponentProps<StaffDetailParams>;
+type StaffDetailPageProps = RouteComponentProps<StaffDetailPageParams>;
 
-const StaffDetail: React.FC<StaffDetailProps> = (props) => {
+const StaffDetailPage: React.FC<StaffDetailPageProps> = (props) => {
     const dispatch = useDispatch();
 
     const {result, isLoading, error} = useTypeSelector(state => state.staffDetail);
@@ -62,9 +62,9 @@ const StaffDetail: React.FC<StaffDetailProps> = (props) => {
                         <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                             <div className="card-body">
                                 <ul className="list-group list-group-flush">
-                                    {result.films.map((film, index) => {
+                                    {result.films.map((film) => {
                                         return (
-                                            <li key={index} className="list-group-item align-items-center">
+                                            <li key={film.filmId + film.professionKey + film.description} className="list-group-item align-items-center">
                                                 <Link to={FilmHelper.getDetailLink(film.filmId)}>
                                                     <p>{film.nameRu}</p>
                                                     <p>Роль: {film.professionKey}</p>
@@ -84,4 +84,4 @@ const StaffDetail: React.FC<StaffDetailProps> = (props) => {
     return (<p>StaffId not found</p>);
 }
 
-export default StaffDetail;
+export default StaffDetailPage;

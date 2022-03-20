@@ -4,13 +4,13 @@ import {Dropdown, DropdownButton} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useTypeSelector} from "../../hooks/useTypeSelector";
 import {fetchTop} from "../../store/action-creators/FetchTop";
-import Loading from "../common/loading/Loading";
 import {TopOfTypeNames, TopOfTypeParameters} from "../../types/kinopoisk/TopType";
-import MainPagination from "../common/mainPagination/MainPagination";
-import FilmList from "../films/filmList/FilmList";
 import {RatingType} from "../../types/kinopoisk/RatingType";
+import Loading from "../../components/common/loading/Loading";
+import MainPagination from "../../components/common/mainPagination/MainPagination";
+import FilmList from "../../components/films/filmList/FilmList";
 
-function TopFilms() {
+function TopFilmsPage() {
     const {result, isLoading, error} = useTypeSelector(state => state.top);
     const [currentTop, setCurrentTop] = useState(TopOfTypeParameters.TOP_250_BEST_FILMS);
     const [page, setPage] = useState(1);
@@ -55,4 +55,4 @@ function TopFilms() {
     );
 }
 
-export default TopFilms;
+export default TopFilmsPage;

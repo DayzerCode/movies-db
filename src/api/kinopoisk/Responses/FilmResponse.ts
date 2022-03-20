@@ -12,5 +12,5 @@ export default interface FilmResponse {
     rating: number,
     ratingVoteCount: number,
     posterUrl: string,
-    posterUrlPreview: string,
+    posterUrlPreview: string
 }
