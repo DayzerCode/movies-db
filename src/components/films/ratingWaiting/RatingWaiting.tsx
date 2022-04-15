@@ -4,9 +4,9 @@ interface RatingProps {
     rating: string
 }
 
-const RatingWaiting: React.FC<RatingProps> = (props) => {
+const RatingWaiting: React.FC<RatingProps> = ({rating}) => {
     const ratingColor = () => {
-        const ratingNumber = parseInt(props.rating);
+        const ratingNumber = parseInt(rating);
         if (ratingNumber >= 80) {
             return 'text-success';
         } else if (ratingNumber >= 55) {
@@ -15,7 +15,7 @@ const RatingWaiting: React.FC<RatingProps> = (props) => {
             return 'text-danger';
         }
     }
-    return (<p className={ratingColor()}>Рейтинг ожидания: {props.rating}</p>);
+    return (<p className={ratingColor()}>Рейтинг ожидания: {rating}</p>);
 }
 
 export default RatingWaiting;

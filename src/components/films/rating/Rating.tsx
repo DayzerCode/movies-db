@@ -4,18 +4,17 @@ interface RatingProps {
     rating: number
 }
 
-const Rating: React.FC<RatingProps> = (props) => {
-
+const Rating: React.FC<RatingProps> = ({rating}) => {
     const ratingColor = () => {
-        if (props.rating >= 7) {
+        if (rating >= 7) {
             return 'text-success';
-        } else if (props.rating >= 5) {
+        } else if (rating >= 5) {
             return 'text-warning';
         } else {
             return 'text-danger';
         }
     }
-    return (<p className={ratingColor()}>Рейтинг: {props.rating}</p>);
+    return (<p className={ratingColor()}>Рейтинг: {rating}</p>);
 }
 
 export default Rating;

@@ -1,12 +1,12 @@
 import React from "react";
 import Menu from "../menu/Menu";
 
-const MainLayout: React.FC = (props) => {
+const MainLayout: React.FC = ({children}) => {
     return (
         <div className="App">
             <div className="container">
                 <Menu/>
-                {props.children}
+                {children}
                 <p>powered by Kinopoiskapiunofficial.tech</p>
             </div>
         </div>
